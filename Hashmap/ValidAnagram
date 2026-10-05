@@ -1,0 +1,53 @@
+# Valid Anagram - Solution
+
+## Problem Statement
+Given two strings `s` and `t`,return `true` if `t` is an anagram of `s`, and `false` otherwise. An anagram is a word or phrase formed by rearranging the letters of a different word or phrase.
+
+## Step-by-Step Logic
+
+### Frequency Counting Approach:
+1. **Initialize Frequency Array**: 26 elements for lowercase English letters
+2. **Count Characters in s**: Increment frequency for each character
+3. **Decrement Characters in t**: Decrement frequency for each character
+4. **Check Balance**: All frequencies should be zero for valid anagram
+
+## Complexity Analysis
+
+### Time Complexity: **O(n)**
+- First pass through string s: O(n)
+- Second pass through string t: O(m)
+- Third pass through frequency array: O(26) = O(1)
+- Total: O(n + m) = O(n) where n is length of longer string
+
+### Space Complexity: **O(1)**
+- Fixed size array of 26 integers
+- Constant extra space regardless of input size
+
+## Final Code with Comments
+
+```cpp
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        // Frequency array for 26 lowercase letters
+        vector<int> sk(26, 0);
+        
+        // Count characters in string s
+        for(char c : s) {
+            sk[c - 'a']++;
+        }
+        
+        // Decrement for characters in string t
+        for(char c : t) {
+            sk[c - 'a']--;
+        }
+        
+        // Check if all frequencies are zero
+        for(int count : sk) {
+            if(count != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+};
